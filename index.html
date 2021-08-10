@@ -26,8 +26,18 @@
                 </div>      
             </div>
             <hr/> 
-            <div class="item">
-                
+
+            <div class="search item">
+                <select id="selector">
+                  <optgroup label="Search Engine" >
+                    <option value="google">Google</option>
+                    <option value="duck">Duck Duck Go</option>
+                    <option value="bing">Bing</option>
+                    <option value="yandex">Yandex</option>
+                    <option value="baidu">Baidu</option>                
+                  </optgroup>
+                </select>
+                <input id="bar" type="search">
             </div>
             
         </div>
@@ -35,6 +45,7 @@
     
 </body>
     <script src="openweather.js"></script>
+    <script src="search.js"></script>
     <script>      
 
         func = function()

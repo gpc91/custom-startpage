@@ -38,6 +38,8 @@ body
     width: 640px;   
     backdrop-filter: blur(8px);
     border-radius: 16pt;
+
+    padding-bottom: 16pt;
 }
 
 .main .content .item
