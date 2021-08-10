@@ -1,29 +1,40 @@
-class OWM
+class OpenWeather
 {
-    static openweathermap_key = `${window.localStorage.getItem("owm_key")}`; // REPLACE THIS WITH YOUR API_KEY OR ADD TO owm_key LOCAL STORAGE!
+    static openweathermap_key = `${window.localStorage.getItem("owm_key")}`; // REPLACE THIS WITH YOUR API_KEY OR ADD TO OpenWeather_key LOCAL STORAGE!
     static openweathermap_interval = 60 * 15; // update interval in seconds (defaulting to 15 minutes)
 
     static weather_icon = document.getElementById("weather_icon");
     static weather_desc = document.getElementById("weather_desc");
     static weather_temp = document.getElementById("weather_temp");
+    static weather_location_name = document.getElementById("weather_location_name");
+
+    static latitude = window.localStorage.getItem("owm_latitude");
+    static longitude = window.localStorage.getItem("owm_longitude");
 
     static Weather(params)
     {
 
         function f(params)
         {
-            console.log(OWM.UrlBuilder(params));
-            fetch (OWM.UrlBuilder(params))
-                .then(response => response.text())
-                .then(data => {
-                    OWM.UpdatePage(data);
-                }); 
+            var url = OpenWeather.UrlBuilder(params);
+            if (url)
+            {
+                fetch (url)
+                    .then(response => response.text())
+                    .then(data => {
+                        OpenWeather.UpdatePage(data);
+                    }); 
+            }
+            else
+            {
+                console.error("Malformed URL.");
+            }   
         }
 
         // if there is a stored call and the specified interval time has elapsed since its call then we can call it again to get
         // data to populate the page with
         var last_call = window.localStorage.getItem('last_call');
-        if (!last_call || (last_call && ((Date.now() - last_call) >= (1000 * OWM.openweathermap_interval))))
+        if (!last_call || (last_call && ((Date.now() - last_call) >= (1000 * OpenWeather.openweathermap_interval))))
         {
             f(params);
         }
@@ -33,7 +44,7 @@ class OWM
             var last_resp = window.localStorage.getItem('last_resp');
             if (last_resp)
             {
-                OWM.UpdatePage(last_resp, true);
+                OpenWeather.UpdatePage(last_resp, true);
             }
             else
             {
@@ -45,14 +56,15 @@ class OWM
     static UpdatePage(data, local = false)
     {
         var js_c = JSON.parse(data);
-        (OWM.weather_icon ? OWM.weather_icon.src = `https://openweathermap.org/img/wn/${js_c['weather'][0]['icon']}@2x.png` : console.error("No element with id 'weather_icon' found."));
-        (OWM.weather_desc ? OWM.weather_desc.innerHTML = `${js_c['weather'][0]['main']}: ${js_c['weather'][0]['description']}` : console.error("No element with id 'weather_desc' found."));
-        (OWM.weather_temp ? OWM.weather_temp.innerHTML = `${Math.round(js_c['main']['temp'])}\u2103` : console.error("No element with id 'weather_temp' found."));
+        (OpenWeather.weather_icon ? OpenWeather.weather_icon.src = `https://openweathermap.org/img/wn/${js_c['weather'][0]['icon']}@2x.png` : console.error("No element with id 'weather_icon' found."));
+        (OpenWeather.weather_desc ? OpenWeather.weather_desc.innerHTML = `${js_c['weather'][0]['main']}: ${js_c['weather'][0]['description']}` : console.error("No element with id 'weather_desc' found."));
+        (OpenWeather.weather_temp ? OpenWeather.weather_temp.innerHTML = `${Math.round(js_c['main']['temp'])}\u2103` : console.error("No element with id 'weather_temp' found."));
+        (OpenWeather.weather_location_name ? OpenWeather.weather_location_name.innerHTML = `${js_c['name']}` : console.error("No element with id 'weather_location_name' found."));
         if (!local)
         {
             // save json data in text form for later (offline/cached) use.
             window.localStorage.setItem('last_call', Date.now());
-            window.localStorage.setItem('last_resp', data);   
+            window.localStorage.setItem('last_resp', data);
         }
     }
 
@@ -65,8 +77,7 @@ class OWM
             position: 
             units: 
         */
-        let url = String();
-        url = url.concat(url, "https://api.openweathermap.org/data/2.5/weather?");
+        let url = "https://api.openweathermap.org/data/2.5/weather?";
         
         let parameters = [];
 
@@ -84,16 +95,55 @@ class OWM
                     parameters.push(`zip=${params['zip']}`);
                 }
             }
-            (params['position'] ? parameters.push(`lon=${params['position'].coords.longitude}&lat=${params['position'].coords.latitude}`) : console.error("no GeolocationPosition specified"));
+            // "_" placeholder for "use stored position"
+            if (params['position'] == "_")
+            {
+                // if we have already stored lon, lat information, use that
+                if (OpenWeather.longitude && OpenWeather.latitude)
+                {
+                    console.log(`local stored (lon: ${OpenWeather.longitude}, lat: ${OpenWeather.latitude})`);
+                    window.localStorage.getItem('owm_longitude');
+                    window.localStorage.getItem('owm_latitude');
+                    parameters.push(`lon=${OpenWeather.longitude}&lat=${OpenWeather.latitude}`);
+                }
+                else
+                {
+                    console.error("No local longitude or latitude stored...");
+                    return null;
+                }
+            }
+            else
+            {
+                (params['position'] ? parameters.push(`lon=${params['position'].coords.longitude}&lat=${params['position'].coords.latitude}`) : console.error("no GeolocationPosition specified"));                   
+                if (!window.localStorage.getItem("owm_longitude")) window.localStorage.setItem("owm_longitude", params['position'].coords.longitude);
+                if (!window.localStorage.getItem("owm_latitude")) window.localStorage.setItem("owm_latitude", params['position'].coords.latitude);
+            }
             (params['units'] ? parameters.push(`units=${params['units']}`) : console.error("no units specified"));
         }
 
         parameters.forEach(function(value)
         {
+
+            console.log(value);
+
             url += `${value}&`;
         });
-        url += `appid=${OWM.openweathermap_key}`;
-
+        url += `appid=${OpenWeather.openweathermap_key}`;
+        console.log(url);
         return url;
     }
+    
+    // check for stored coords.
+    static StoredPosition()
+    {
+        if (OpenWeather.longitude && OpenWeather.latitude)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }
