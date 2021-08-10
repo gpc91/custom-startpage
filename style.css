@@ -64,6 +64,7 @@ hr
     margin: 0;
     width: 512px;
     margin: auto;
+    opacity: 0.5;
 }
 
 .weather_card
@@ -127,4 +128,58 @@ hr
     grid-row: 3;
     font-size: medium;
     font-weight: lighter;
+}
+
+/* || SEARCH BOX */
+.search {
+
+    display: grid;
+
+    grid-template-columns: 256px 64px;
+
+    height: 25px;
+    margin: 0 128px;
+}
+
+.search > select {
+
+    grid-row: 1;
+    grid-column: 2;
+
+    max-width: 128px;
+    min-height: 24px;
+    
+    border-width: 1px;
+    border-left: none;
+    background: white;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 32px;
+    border-bottom-right-radius: 32px;
+    appearance: none;
+    text-align: center;
+    overflow: hidden;
+    outline: none;
+    text-align-last: center; /* centers text inside of the selector button (https://stackoverflow.com/a/34532555) */
+}
+
+.search > input
+{
+
+    grid-row: 1;
+    grid-column: 1;
+    
+    min-height: 24px;
+
+    text-align: center;
+    width: 256px;
+    min-height: 24px;
+    text-indent: 8px;
+    border-width: 1px;
+    border-left: none;
+    background: white;
+    border-top-left-radius: 32px;
+    border-bottom-left-radius: 32px;
+    border-image: none;
+
 }
