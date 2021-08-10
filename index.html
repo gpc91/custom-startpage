@@ -44,18 +44,16 @@
 </body>
     <script src="openweathermap.js"></script>
     <script>
-
-        OWM.GetByCity("London");
+        OWM.GetByGeo();
         setInterval(function()
         {
-            OWM.GetByCity("London");
+            OWM.GetByGeo();
         }, 1000 * 300); // check every 5 minutes.
-
         dt = new Date();
         setInterval(function() 
         {
             dt.setTime(Date.now());
             document.getElementById('clock').innerText = dt.toLocaleString().substring(11, 20);
-        }, 1000);       
+        }, 1000);    
     </script>
 </html>
