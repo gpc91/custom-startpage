@@ -25,18 +25,43 @@ body
     grid-column: 2;
     grid-row: 2;
 
-    padding: 32pt;
+    /*
+        maring: 0 auto;
+    */
 
+    padding: 32pt;
+}
+
+.main .content
+{
+    margin: 0 auto;
+    width: 640px;   
     backdrop-filter: blur(8px);
     border-radius: 16pt;
 }
 
+.main .content .item
+{
+    padding: 16pt;  
+}
+
 .clock
 {
+
+    padding: 16pt 0;
+
     font-weight: bolder;
     font-size: larger;
     font-family:'Courier New', Courier, monospace;
     text-align: center;
+}
+
+hr 
+{
+    padding: 0;
+    margin: 0;
+    width: 512px;
+    margin: auto;
 }
 
 .weather_card
@@ -44,17 +69,14 @@ body
     display: grid;
 
     grid-template-columns: auto;
-    grid-template-rows: 24pt auto 16pt;
+    grid-template-rows: 24pt auto;
 
     grid-template-areas:
         "header"
-        "body"
-        "footer";
+        "body";
 
-    min-height: 128pt;
-    max-height: 512pt;
-
-    padding: 16pt;   
+    min-height: 100pt;
+    max-height: 512pt; 
 } .weather_card > .title
 {
     grid-area: header;
@@ -64,6 +86,7 @@ body
     grid-area: body;
 
     display: grid;
+    height: 100px;
     grid-template-rows: auto;
     grid-template-columns: auto 64px 224px auto;
 }
@@ -95,12 +118,10 @@ body
 }
 .weather_card > .body .details-container > .desc_box > .desc_main
 {
-    padding: auto;
     grid-row: 2;
 }
 .weather_card > .body .details-container > .desc_box > .desc_sub
-{ 
-    padding: auto;
+{     
     grid-row: 3;
     font-size: medium;
     font-weight: lighter;
