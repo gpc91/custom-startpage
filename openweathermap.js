@@ -1,7 +1,7 @@
 class OpenWeather
 {
     static openweathermap_key = `${window.localStorage.getItem("owm_key")}`; // REPLACE THIS WITH YOUR API_KEY OR ADD TO OpenWeather_key LOCAL STORAGE!
-    static openweathermap_interval = 60 * 15; // update interval in seconds (defaulting to 15 minutes)
+    static openweathermap_interval = 60 * 5; // update interval in seconds (defaulting to 5 minutes)
 
     static weather_icon = document.getElementById("weather_icon");
     static weather_desc = document.getElementById("weather_desc");
