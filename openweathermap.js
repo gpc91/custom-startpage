@@ -123,7 +123,7 @@ class OWM
             fetch (OWM.UrlBuilder(params))
                 .then(response => response.text())
                 .then(data => {
-                    UpdatePage(data);
+                    OWM.UpdatePage(data);
                 }); 
         }
 
@@ -137,7 +137,7 @@ class OWM
             var last_resp = window.localStorage.getItem('last_resp');
             if (last_resp)
             {
-                this.UpdatePage(params, true);
+                OWM.UpdatePage(params, true);
             }
             else
             {
@@ -196,7 +196,7 @@ class OWM
         {
             url += `${value}&`;
         });
-        url += `${OWM.openweathermap_key}`;
+        url += `appid=${OWM.openweathermap_key}`;
 
         return url;
     }
