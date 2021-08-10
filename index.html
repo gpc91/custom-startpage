@@ -12,6 +12,7 @@
         <div class="content">
             <div class="clock item" id="clock"></div>
             <hr/>
+
             <div class="weather_card item">
                 <div class = "title" id = "weather_location_name"></div>  
                 <div class = "body">
@@ -40,6 +41,12 @@
                 <input id="bar" type="search">
             </div>
             
+            <div class="flex item">
+                <a href="https://github.com/gpc91" target="_blank"><img src="images/GitHub-Mark-Light-32px.png" /></a>
+                <a href="https://www.youtube.com" target="_blank"><img src="images/yt_icon_mono_dark.png"></a>
+            </div>
+            
+
         </div>
     </div>
     
@@ -68,12 +75,9 @@
                     });
                 });    
             }
-        }
-        
-        func();
+        }        
         setInterval(func(), 1000 * 5);
-        
-        
+                
         // CLOCK UPDATE
         dt = new Date();
         document.getElementById('clock').innerText = dt.toLocaleString().substring(12, 20);

@@ -1,6 +1,6 @@
 class OpenWeather
 {
-    static openweathermap_key = `${window.localStorage.getItem("owm_key")}`; // REPLACE THIS WITH YOUR API_KEY OR ADD TO OpenWeather_key LOCAL STORAGE!
+    static openweathermap_key = window.localStorage.getItem("owm_key"); // REPLACE THIS WITH YOUR API_KEY OR ADD TO OpenWeather_key LOCAL STORAGE!
     static openweathermap_interval = 60 * 5; // update interval in seconds (defaulting to 5 minutes)
 
     static weather_icon = document.getElementById("weather_icon");
@@ -14,44 +14,47 @@ class OpenWeather
 
     static Weather(params)
     {
-
-        function f(params)
+        if (OpenWeather.openweathermap_key)
         {
-            var url = OpenWeather.UrlBuilder(params);
-            if (url)
+            function f(params)
             {
-                fetch (url)
-                    .then(response => response.text())
-                    .then(data => {
-                        OpenWeather.UpdatePage(data);
-                    }); 
+                var url = OpenWeather.UrlBuilder(params);
+                if (url)
+                {
+                    fetch (url)
+                        .then(response => response.text())
+                        .then(data => {
+                            console.log("FETCHING...");
+                            OpenWeather.UpdatePage(data);
+                        }); 
+                }
+                else
+                {
+                    console.error("Malformed URL.");
+                }   
+            }
+    
+            // if there is a stored call and the specified interval time has elapsed since its call then we can call it again to get
+            // data to populate the page with
+            var last_call = window.localStorage.getItem('last_call');
+            if (!last_call || (last_call && ((Date.now() - last_call) >= (1000 * OpenWeather.openweathermap_interval))))
+            {
+                f(params);
             }
             else
             {
-                console.error("Malformed URL.");
-            }   
+                // if there is a response stored from a previous call then use that data to populate the page.
+                var last_resp = window.localStorage.getItem('last_resp');
+                if (last_resp)
+                {
+                    OpenWeather.UpdatePage(last_resp, true);
+                }
+                else
+                {
+                    console.error("An unknown error occurred while loading weather data.");
+                }
+            }  
         }
-
-        // if there is a stored call and the specified interval time has elapsed since its call then we can call it again to get
-        // data to populate the page with
-        var last_call = window.localStorage.getItem('last_call');
-        if (!last_call || (last_call && ((Date.now() - last_call) >= (1000 * OpenWeather.openweathermap_interval))))
-        {
-            f(params);
-        }
-        else
-        {
-            // if there is a response stored from a previous call then use that data to populate the page.
-            var last_resp = window.localStorage.getItem('last_resp');
-            if (last_resp)
-            {
-                OpenWeather.UpdatePage(last_resp, true);
-            }
-            else
-            {
-                console.error("An unknown error occurred while loading weather data.");
-            }
-        }  
     }
 
     static UpdatePage(data, local = false)
@@ -125,9 +128,7 @@ class OpenWeather
 
         parameters.forEach(function(value)
         {
-
             console.log(value);
-
             url += `${value}&`;
         });
         url += `appid=${OpenWeather.openweathermap_key}`;
@@ -147,5 +148,4 @@ class OpenWeather
             return false;
         }
     }
-
 }

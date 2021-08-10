@@ -46,6 +46,25 @@ body
 {
     padding: 16pt;  
 }
+.main .content .flex
+{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: baseline;
+    margin: 0 auto;
+}
+
+.main .content .flex a
+{
+    margin: 0 16px;
+    height: 24px;
+}
+
+.main .content .flex img
+{
+    height: 32px;
+}
 
 .clock
 {
