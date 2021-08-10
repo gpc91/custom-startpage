@@ -4,7 +4,8 @@ class OpenWeather
     static openweathermap_interval = 60 * 5; // update interval in seconds (defaulting to 5 minutes)
 
     static weather_icon = document.getElementById("weather_icon");
-    static weather_desc = document.getElementById("weather_desc");
+    static weather_desc_main = document.getElementById("weather_desc_main");
+    static weather_desc_sub = document.getElementById("weather_desc_sub");
     static weather_temp = document.getElementById("weather_temp");
     static weather_location_name = document.getElementById("weather_location_name");
 
@@ -57,7 +58,8 @@ class OpenWeather
     {
         var js_c = JSON.parse(data);
         (OpenWeather.weather_icon ? OpenWeather.weather_icon.src = `https://openweathermap.org/img/wn/${js_c['weather'][0]['icon']}@2x.png` : console.error("No element with id 'weather_icon' found."));
-        (OpenWeather.weather_desc ? OpenWeather.weather_desc.innerHTML = `${js_c['weather'][0]['main']}: ${js_c['weather'][0]['description']}` : console.error("No element with id 'weather_desc' found."));
+        (OpenWeather.weather_desc_main ? OpenWeather.weather_desc_main.innerHTML = `${js_c['weather'][0]['main']}` : console.error("No element with id 'weather_desc_main' found."));
+        (OpenWeather.weather_desc_sub ? OpenWeather.weather_desc_sub.innerHTML = `${js_c['weather'][0]['description']}` : console.error("No element with id 'weather_desc_sub' found."));
         (OpenWeather.weather_temp ? OpenWeather.weather_temp.innerHTML = `${Math.round(js_c['main']['temp'])}\u2103` : console.error("No element with id 'weather_temp' found."));
         (OpenWeather.weather_location_name ? OpenWeather.weather_location_name.innerHTML = `${js_c['name']}` : console.error("No element with id 'weather_location_name' found."));
         if (!local)

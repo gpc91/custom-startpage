@@ -1,5 +1,10 @@
 body 
 {
+
+    display: grid;
+    grid-template-columns:  15% auto 15%;
+    grid-template-rows:     10% auto 10%;
+
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -12,14 +17,26 @@ body
     color: #F2EDE4;
     font-weight: bolder;
     font-size: larger;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;   
+}
+
+.main
+{
+    grid-column: 2;
+    grid-row: 2;
+
+    padding: 32pt;
+
+    backdrop-filter: blur(8px);
+    border-radius: 16pt;
 }
 
 .clock
 {
     font-weight: bolder;
     font-size: larger;
-    font-family:'Courier New', Courier, monospace
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
 }
 
 .weather_card
@@ -34,18 +51,57 @@ body
         "body"
         "footer";
 
-    width: 320pt;
-    height: 128pt;
+    min-height: 128pt;
     max-height: 512pt;
 
-    padding: 16pt;
-    border-radius: 24pt;
-
-    backdrop-filter: blur(8px);
+    padding: 16pt;   
 } .weather_card > .title
 {
     grid-area: header;
-} .weather_card > .content
+    text-align: center;
+} .weather_card > .body
 {
     grid-area: body;
+
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto 64px 224px auto;
+}
+.weather_card >.body img
+{
+    grid-column: 2;
+}
+.weather_card >.body .details-container 
+{
+    grid-column: 3;
+
+    display: grid;
+    grid-template-columns: 72pt auto;
+    grid-template-rows: auto 64pt auto;
+
+    height: 100px;
+} .weather_card >.body .details-container > .temp
+{
+    text-align: center;
+    margin: auto;
+    grid-row: 2 / 4;
+}
+.weather_card > .body .details-container > .desc_box
+{
+    grid-row: 2;
+    grid-column: 2;
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+}
+.weather_card > .body .details-container > .desc_box > .desc_main
+{
+    padding: auto;
+    grid-row: 2;
+}
+.weather_card > .body .details-container > .desc_box > .desc_sub
+{ 
+    padding: auto;
+    grid-row: 3;
+    font-size: medium;
+    font-weight: lighter;
 }

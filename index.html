@@ -8,20 +8,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="clock" class="clock"></div>
-    <div class="weather_card">
-        <div class = "title" id = "weather_location_name"></div>  
-        <div class = "body">
-            <span id="weather_temp" style="float:left;"></span>
-            <img src="" id="weather_icon" />
-            <div id="weather_location_name"></div>
-            <div id="weather_desc"></div>
-        </div>      
-    </div>    
+    <div class="main">
+        <div id="clock" class="clock"></div>
+        <hr/>
+        <div class="weather_card">
+            <div class = "title" id = "weather_location_name"></div>  
+            <div class = "body">
+                <img src="" class="icon" id="weather_icon" />
+                <div class="details-container">
+                    <span class="temp" id="weather_temp" style="float:left;"></span> 
+                    <div class="desc_box">
+                        <div class="desc_main" id="weather_desc_main"></div>
+                        <div class="desc_sub" id="weather_desc_sub"></div>
+                    </div>               
+                </div>
+            </div>      
+        </div>    
+    </div>
+    
 </body>
     <script src="openweathermap.js"></script>
     <script>      
-
 
         func = function()
         {
