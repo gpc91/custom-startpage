@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body 
+        {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #a3a3d4;
+
+            font-weight: bolder;
+            font-size: larger;
+            font-family:'Courier New', Courier, monospace
+        }
+
+        #clock
+        {
+            font-weight: bolder;
+            font-size: larger;
+            font-family:'Courier New', Courier, monospace
+        }
+    </style>
+</head>
+<body>
+    <div id="clock" class="clock"></div>
+    <div>
+        <span id="weather_temp" style="float:left;"></span>
+        <img src="" id="weather_icon" />
+    </div>
+    <div id="weather_desc"></div>
+</body>
+    <script src="openweathermap.js"></script>
+    <script>
+
+        OWM.GetByCity("London");
+        setInterval(function()
+        {
+            OWM.GetByCity("London");
+        }, 1000 * 300); // check every 5 minutes.
+
+        dt = new Date();
+        setInterval(function() 
+        {
+            dt.setTime(Date.now());
+            document.getElementById('clock').innerText = dt.toLocaleString().substring(11, 20);
+        }, 500);       
+    </script>
+</html>
