@@ -44,11 +44,28 @@
 </body>
     <script src="openweathermap.js"></script>
     <script>
-        OWM.GetByGeo();
-        setInterval(function()
+
+        navigator.geolocation.getCurrentPosition(function(pos)
+        {
+            OWM.Weather({
+                position: pos,
+                units: 'metric'
+            });
+        });
+        
+        OWM.Weather({ 
+            city: "London",
+        });
+
+        weather = false;
+        if (weather)
         {
             OWM.GetByGeo();
-        }, 1000 * 300); // check every 5 minutes.
+            setInterval(function()
+            {
+                OWM.GetByGeo();
+            }, 1000 * 300); // check every 5 minutes.
+        }        
         dt = new Date();
         setInterval(function() 
         {

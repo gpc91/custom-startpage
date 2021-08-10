@@ -101,6 +101,7 @@ class OWM
 
             let lat = position.coords.latitude;
             let lon = position.coords.longitude;
+
             fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OWM.openweathermap_key}&units=metric`)
                 .then(response => response.text())
                 .then(data => {
@@ -111,5 +112,92 @@ class OWM
                     (OWM.weather_temp ? OWM.weather_temp.innerHTML = `${Math.round(js_c['main']['temp'])}\u2103` : console.error("No element with id 'weather_temp' found."));
                 });
         });
+    };
+
+    static Weather(params)
+    {
+
+        function f(params)
+        {
+            console.log(OWM.UrlBuilder(params));
+            fetch (OWM.UrlBuilder(params))
+                .then(response => response.text())
+                .then(data => {
+                    UpdatePage(data);
+                }); 
+        }
+
+        var last_call = window.localStorage.getItem('last_call');
+        if (!last_call || (last_call && ((Date.now() - last_call) >= (1000 * OWM.openweathermap_interval))))
+        {
+            f(params);
+        }
+        else
+        {
+            var last_resp = window.localStorage.getItem('last_resp');
+            if (last_resp)
+            {
+                this.UpdatePage(params, true);
+            }
+            else
+            {
+                console.error("An unknown error occurred while loading weather data.");
+            }
+        }  
+    }
+
+    static UpdatePage(data, local = false)
+    {
+        var js_c = JSON.parse(data);
+        (OWM.weather_icon ? OWM.weather_icon.src = `https://openweathermap.org/img/wn/${js_c['weather'][0]['icon']}@2x.png` : console.error("No element with id 'weather_icon' found."));
+        (OWM.weather_desc ? OWM.weather_desc.innerHTML = `${js_c['weather'][0]['main']}: ${js_c['weather'][0]['description']}` : console.error("No element with id 'weather_desc' found."));
+        (OWM.weather_temp ? OWM.weather_temp.innerHTML = `${Math.round(js_c['main']['temp'])}\u2103` : console.error("No element with id 'weather_temp' found."));
+        if (!local)
+        {
+            // save json data in text form for later (offline/cached) use.
+            window.localStorage.setItem('last_call', Date.now());
+            window.localStorage.setItem('last_resp', data);   
+        }
+    }
+
+    static UrlBuilder(params)
+    {
+        /*
+            city: 
+            zip:
+            country:
+            position: 
+            units: 
+        */
+        let url = String();
+        url = url.concat(url, "https://api.openweathermap.org/data/2.5/weather?");
+        
+        let parameters = [];
+
+        if (params)
+        {
+            (params['city'] ? parameters.push(`q=${params['city']}`) : console.error("no city."));
+            if (params['zip'])
+            {
+                if (params['country'])
+                {
+                    parameters.push(`zip=${params['zip']},${params['country']}`);
+                }
+                else
+                {
+                    parameters.push(`zip=${params['zip']}`);
+                }
+            }
+            (params['position'] ? parameters.push(`lon=${params['position'].coords.longitude}&lat=${params['position'].coords.latitude}`) : console.error("no GeolocationPosition specified"));
+            (params['units'] ? parameters.push(`units=${params['units']}`) : console.error("no units specified"));
+        }
+
+        parameters.forEach(function(value)
+        {
+            url += `${value}&`;
+        });
+        url += `${OWM.openweathermap_key}`;
+
+        return url;
     }
 }
