@@ -210,6 +210,11 @@ hr
 
 }
 
+.search > input:focus
+{
+    outline: none;
+}
+
 input {
 
     min-height: 24px;
