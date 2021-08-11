@@ -9,44 +9,40 @@
 </head>
 <body>
     <div class="main">
-        <div class="content">
-            <div class="clock item" id="clock"></div>
-            <hr/>
+        <div class="clock item" id="clock"></div>
+        <hr/>
 
-            <div class="weather_card item">
-                <div class = "title" id = "weather_location_name"></div>  
-                <div class = "body">
-                    <img src="" class="icon" id="weather_icon" />
-                    <div class="details-container">
-                        <span class="temp" id="weather_temp" style="float:left;"></span> 
-                        <div class="desc_box">
-                            <span class="desc_main" id="weather_desc_main"></span>
-                            <span class="desc_sub" id="weather_desc_sub"></span>
-                        </div>               
-                    </div>
-                </div>      
-            </div>
-            <hr/> 
+        <div class="weather_card item">
+            <div class = "title" id = "weather_location_name"></div>  
+            <div class = "body">
+                <img src="" class="icon" id="weather_icon" />
+                <div class="details-container">
+                    <span class="temp" id="weather_temp" style="float:left;"></span> 
+                    <div class="desc_box">
+                        <span class="desc_main" id="weather_desc_main"></span>
+                        <span class="desc_sub" id="weather_desc_sub"></span>
+                    </div>               
+                </div>
+            </div>      
+        </div>
+        <hr/> 
 
-            <div class="item search">
-                <select id="selector">
-                  <optgroup label="Search Engine" >
-                    <option value="google">Google</option>
-                    <option value="duck">Duck Duck Go</option>
-                    <option value="bing">Bing</option>
-                    <option value="yandex">Yandex</option>
-                    <option value="baidu">Baidu</option>                
-                  </optgroup>
-                </select>
-                <input id="bar" type="search">
-            </div>
-            
-            <div class="flex item">
-                <a href="https://github.com/gpc91" target="_blank"><img src="res/images/GitHub-Mark-Light-32px.png" /></a>
-                <a href="https://www.youtube.com" target="_blank"><img src="res/images/yt_icon_mono_dark.png"></a>
-            </div>
-            
-
+        <div class="item search">
+            <input id="bar" type="search" autofocus="" placeholder="search using...">
+            <select id="selector">
+                <optgroup label="Search Engine" >
+                <option value="google">Google</option>
+                <option value="duck">Duck Duck Go</option>
+                <option value="bing">Bing</option>
+                <option value="yandex">Yandex</option>
+                <option value="baidu">Baidu</option>                
+                </optgroup>
+            </select>                
+        </div>
+        
+        <div class="flex item">
+            <a href="https://github.com/gpc91" target="_blank"><img src="res/images/GitHub-Mark-Light-32px.png" /></a>
+            <a href="https://www.youtube.com" target="_blank"><img src="res/images/yt_icon_mono_dark.png"></a>
         </div>
     </div>
     
@@ -54,4 +50,17 @@
     <script src="res/scripts/openweather.js"></script>
     <script src="res/scripts/search.js"></script>
     <script src="res/scripts/main.js"></script>
+    <script>
+        console.log(navigator.userAgent);
+        if (navigator.userAgent.indexOf("Firefox") != -1)
+        {
+            // firefox doesn't support the search event... do something about that.
+            console.log("Firefox... sigh.");
+        }
+        else
+        {
+            // everything else does.
+            console.log("Not Firefox, hurray!");
+        }
+    </script>
 </html>

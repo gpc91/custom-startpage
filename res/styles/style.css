@@ -47,11 +47,11 @@ body
     padding-bottom: 16pt;
 }
 
-.main .content .item
+.main .item
 {
     padding: 16pt;  
 }
-.main .content .flex
+.main .flex
 {
     display: flex;
     flex-flow: row nowrap;
@@ -60,13 +60,13 @@ body
     margin: 0 auto;
 }
 
-.main .content .flex a
+.main .flex a
 {
     margin: 0 16px;
     height: 24px;
 }
 
-.main .content .flex img
+.main .flex img
 {
     height: 32px;
 }
@@ -157,11 +157,12 @@ hr
 /* || SEARCH BOX */
 .search {
 
-    display: grid;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    /*margin: 0 auto;*/
 
-    grid-template-columns: 256px 64px;
-
-    height: 25px;
     margin: 0 128px;
 }
 
@@ -197,8 +198,8 @@ hr
     min-height: 24px;
 
     text-align: center;
+    font-size: 0.7em;
     width: 256px;
-    min-height: 24px;
     text-indent: 8px;
     border-width: 1px;
     border-left: none;

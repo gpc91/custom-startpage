@@ -91,4 +91,27 @@ window.onload = function()
 {
     // if a background.jpg file exists set it as background.
     document.getElementsByTagName('body')[0].style['background-image'] = `url("res/images/background/pexels-eriks-abzinovs-3145239.jpg")`;
+
+    
+    document.getElementById("bar").addEventListener("search", function()
+    {
+        SearchHandler.Search();
+    });
+    document.getElementById("bar").addEventListener("input", function()
+    {
+        SearchHandler.Change();
+    });
+
+    var search_engine_choice = window.localStorage.getItem("search_engine_choice");
+    if (search_engine_choice)
+    {
+        SearchHandler.select_element.value = search_engine_choice;
+    }
+
+    document.getElementById("selector").addEventListener("change", function()
+    {
+        window.localStorage.setItem("search_engine_choice", selector.value);
+    });
+
+
 }

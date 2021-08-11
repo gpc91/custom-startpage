@@ -34,20 +34,6 @@ class SearchHandler
     }
 }
 
-document.getElementById("bar").addEventListener("search", SearchHandler.Search);
-document.getElementById("bar").addEventListener("input", SearchHandler.Change);
-
-var search_engine_choice = window.localStorage.getItem("search_engine_choice");
-if (search_engine_choice)
-{
-    SearchHandler.select_element.value = search_engine_choice;
-}
-
-document.getElementById("selector").addEventListener("change", function()
-{
-    window.localStorage.setItem("search_engine_choice", selector.value);
-});
-
 // USE THE BELOW EVENTUALLY WHEN IT COMES TO SETTING UP INSTALL PAGE
 /*
 switch (window.location.pathname.split("/").pop().split(".")[0])

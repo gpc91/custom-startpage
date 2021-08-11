@@ -9,3 +9,10 @@ Currently you will need to go into the developer tools > 'local storage' and add
 
 ## Credits
 Demo Background Image ["Dark Green Fern Plant"](https://www.pexels.com/photo/dark-green-fern-plant-3145239/) by [Eriks Abzinovs](https://www.pexels.com/@pixworthmedia)
+
+# Notes
+
+## Firefox
+This startpage utilizes the blur() function which requires the ```layout.css.backdrop-filter.enabled``` and ```gfx.webrender.all``` to be set to *true*. To do this, navigate to ```about:config``` and search the two settings and set them to be *true*.
+
+More information can be found [here](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter).
