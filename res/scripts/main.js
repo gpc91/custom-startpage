@@ -90,5 +90,5 @@ function index()
 window.onload = function()
 {
     // if a background.jpg file exists set it as background.
-    document.getElementsByTagName('body')[0].style['background-image'] = `url("background/pexels-eriks-abzinovs-3145239.jpg")`;
+    document.getElementsByTagName('body')[0].style['background-image'] = `url("res/images/background/pexels-eriks-abzinovs-3145239.jpg")`;
 }

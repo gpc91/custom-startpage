@@ -1,6 +1,5 @@
 body 
 {
-
     display: grid;
     grid-template-columns:  15% auto 15%;
     grid-template-rows:     10% auto 10%;
@@ -27,7 +26,8 @@ body
 
     justify-self: center;
 
-    width: 640px;       
+    width: 640px;      
+    min-height: 640px; 
     padding: 32pt;
     padding-bottom: 16pt;
 
@@ -170,6 +170,7 @@ hr
     grid-row: 1;
     grid-column: 2;
 
+    width: 196px;
     max-width: 128px;
     min-height: 24px;
     
