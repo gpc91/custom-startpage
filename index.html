@@ -53,44 +53,5 @@
 </body>
     <script src="openweather.js"></script>
     <script src="search.js"></script>
-    <script>      
-
-        func = function()
-        {
-            if (OpenWeather.StoredPosition())
-            {
-                // set position to use localStorage
-                OpenWeather.Weather({
-                    position: "_",
-                    units: 'metric'
-                });
-            }
-            else
-            {
-                // otherwise get position from navigator
-                navigator.geolocation.getCurrentPosition(function(pos) {
-                    OpenWeather.Weather({
-                        position: pos,
-                        units: 'metric'
-                    });
-                });    
-            }
-        }      
-          
-        func();
-        setInterval(func, 1000 * 5);
-                
-        // CLOCK UPDATE
-        dt = new Date();
-        document.getElementById('clock').innerText = dt.toLocaleString().substring(12, 20);
-        setInterval(function() 
-        {
-            dt.setTime(Date.now());
-            document.getElementById('clock').innerText = dt.toLocaleString().substring(12, 20);
-        }, 1000);    
-
-        // if a background.jpg file exists set it as background.
-        document.getElementsByTagName('body')[0].style['background-image'] = `url("background/pexels-eriks-abzinovs-3145239.jpg")`;
-
-    </script>
+    <script src="main.js"></script>
 </html>
