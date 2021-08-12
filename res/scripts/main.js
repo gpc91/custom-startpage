@@ -1,5 +1,7 @@
+console.log("in the switch...");
 switch (window.location.pathname.split("/").pop().split(".")[0])
-{
+{    
+    case "":
     case "index":
         // index page
         console.log("We're in the index page.");
