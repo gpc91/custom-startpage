@@ -92,13 +92,15 @@ function index()
 window.onload = function()
 {
     // if a background.jpg file exists set it as background.
-    document.getElementsByTagName('body')[0].style['background-image'] = `url("res/images/background/pexels-eriks-abzinovs-3145239.jpg")`;
-
+    document.getElementsByTagName('html')[0].style['background-image'] = 'url("res/images/background/pexels-eriks-abzinovs-3145239.jpg")';
     
+    // the 'search' event is not supported on Firefox, so for now the search function
+    // is completely unusable unless site is accessed using literally any other web browser.
     document.getElementById("bar").addEventListener("search", function()
     {
         SearchHandler.Search();
     });
+
     document.getElementById("bar").addEventListener("input", function()
     {
         SearchHandler.Change();
@@ -114,6 +116,4 @@ window.onload = function()
     {
         window.localStorage.setItem("search_engine_choice", selector.value);
     });
-
-
 }

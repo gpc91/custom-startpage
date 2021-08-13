@@ -1,3 +1,27 @@
+html
+{    
+
+    /*
+
+        Credit to https://github.com/yang-wei for background image that properly scales on mobile
+        as well as desktop.
+
+        https://gist.github.com/yang-wei/9114967
+
+    */
+    background-color: #0D0D0D;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+}
+
 body 
 {
     display: grid;
@@ -8,7 +32,6 @@ body
     padding: 0;
     height: 100vh;
 
-    background-color: #0D0D0D;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

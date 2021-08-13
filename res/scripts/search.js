@@ -1,3 +1,4 @@
+// TODO (George): eventually make modular?
 class SearchHandler
 {
 
@@ -33,44 +34,3 @@ class SearchHandler
         console.log("change...");
     }
 }
-
-// USE THE BELOW EVENTUALLY WHEN IT COMES TO SETTING UP INSTALL PAGE
-/*
-switch (window.location.pathname.split("/").pop().split(".")[0])
-{
-    case "index":
-        // if first time load then display the welcome screen and ask user for name.
-        if (localStorage.getItem("_cn") == undefined)
-        {
-        // set the name in local storage
-            localStorage.setItem("_cn", "George");
-        }
-        else
-        {
-            document.getElementById("client_name").textContent = localStorage.getItem("_cn");
-        }
-
-        if (localStorage.getItem("_sc") == undefined)
-        {
-            localStorage.setItem("_sc", SearchHandler.GetSelector());
-        }
-        else
-        {
-            SearchHandler.SetSelector(localStorage.getItem("_sc"));
-        }
-
-        TimeStep();
-
-        document.getElementById("search_bar").addEventListener("search", SearchHandler.Search);
-        document.getElementById("search_bar").addEventListener("input", SearchHandler.Change);
-
-        document.getElementById("search_selector").addEventListener("change", function()
-        {
-            localStorage.setItem("_sc", SearchHandler.selector_element.value);
-        });
-        break;
-    case "welcome":
-        //alert("Hello!");
-        break;
-}
-*/
